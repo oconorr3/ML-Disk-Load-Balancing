@@ -1,3 +1,5 @@
 *exclude*
 *.pyc
 *.dat
+data/*
+*.pkl

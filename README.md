@@ -7,3 +7,5 @@ Use virtualenv.
 - scipi
 - scikit-learn
 - tensorflow
+
+Install via: `pip install -r requirements.txt`

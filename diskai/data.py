@@ -48,13 +48,13 @@ def normalize_data(inputs):
     RETURNS: inputs, normalized using the given scaler
     """
     np_inputs = np.asarray(inputs)
-    scaler.fit(np_inputs[:, [i * 4 - 1 for i in range(1, config.num_input_lines)]])
+    scaler.fit(np_inputs[:, [i * 4 - 1 for i in range(1, config.num_input_lines + 1)]])
     inputs_normalized = scaler.transform(
-        np_inputs[:, [i * 4 - 1 for i in range(1, config.num_input_lines)]])
-    normed_inputs = np.concatenate((np_inputs[:, [0, 1, 2]], inputs_normalized[:, [0]]), axis=1)
-    normed_inputs = np.concatenate((normed_inputs, inputs_normalized[:, [0]]), axis=1)
-    for i in range(1, config.num_input_lines - 1):
+        np_inputs[:, [i * 4 - 1 for i in range(1, config.num_input_lines + 1)]])
+    all_normed = np.concatenate((np_inputs[:, [0, 1, 2]], inputs_normalized[:, [0]]), axis=1)
+    # all_normed = np.concatenate((all_normed, inputs_normalized[:, [0]]), axis=1)
+    for i in range(2, config.num_input_lines + 1):
         x = i * 4
-        normed_inputs = np.concatenate((normed_inputs, np_inputs[:, [x - 4, x - 3, x - 2]]), axis=1)
-        normed_inputs = np.concatenate((normed_inputs, inputs_normalized[:, [i]]), axis=1)
-    return normed_inputs
+        all_normed = np.concatenate((all_normed, np_inputs[:, [x - 4, x - 3, x - 2]]), axis=1)
+        all_normed = np.concatenate((all_normed, inputs_normalized[:, [i - 1]]), axis=1)
+    return all_normed

@@ -32,7 +32,7 @@ num_input_lines = 5
 # The scaler to use for normalization.
 scaler = QuantileTransformer(output_distribution='normal')
 
-sgd_maxiter = 150
+sgd_maxiter = 500
 n_jobs = 2
 
 ###########################################################
@@ -89,11 +89,11 @@ sklmethods = {
     'sgd-huber': SGDClassifier(alpha=0.0001, average=False, epsilon=0.05, eta0=0.0025,
             fit_intercept=False, l1_ratio=0.10, learning_rate='invscaling', power_t=0.05,
             random_state=None, shuffle=True, tol=None, warm_start=False,
-            verbose=True, loss='huber', penalty='elasticnet', max_iter=sgd_maxiter, n_jobs=-1),
+            verbose=True, loss='huber', penalty='elasticnet', max_iter=sgd_maxiter, n_jobs=n_jobs),
     'sgd-modhuber': SGDClassifier(alpha=0.0001, average=False, epsilon=0.05, eta0=0.0025,
             fit_intercept=False, l1_ratio=0.10, learning_rate='invscaling', power_t=0.05,
             random_state=None, shuffle=True, tol=None, warm_start=False,
-            verbose=True, loss='modified_huber', penalty='elasticnet', max_iter=sgd_maxiter, n_jobs=-1),
+            verbose=True, loss='modified_huber', penalty='l2', max_iter=sgd_maxiter, n_jobs=-1),
     'sgd-perceptron': SGDClassifier(alpha=0.0001, average=False, epsilon=0.05, eta0=0.0025,
             fit_intercept=False, l1_ratio=0.10, learning_rate='invscaling', power_t=0.05,
             random_state=None, shuffle=True, tol=None, warm_start=False,

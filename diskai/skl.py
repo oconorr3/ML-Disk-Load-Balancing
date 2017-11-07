@@ -8,6 +8,7 @@ import config
 from data import *
 
 size_classes = config.size_classes
+inputs = []
 outputs = []
 
 def skl_training(method, sklmethod, ins, outs):
@@ -45,7 +46,7 @@ def initialize(mode, file_list, sklmethods):
             skl_training(method, training_network, normalized_inputs, outputs)
             print("Training with method \"%s\" complete!" % method)
             with open(method + '.output', 'w') as outfile:
-                outfile.write("Accuracy[%s]: %s", (method, sklmethod.score(inputs, outputs)))
+                outfile.write("Accuracy[%s]: %s", (method, training_network.score(inputs, outputs)))
     else:
         pass
 

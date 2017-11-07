@@ -3,3 +3,5 @@
 *.dat
 data/*
 *.pkl
+outputs/*
+*.csv

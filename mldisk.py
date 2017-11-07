@@ -65,26 +65,27 @@ def main():
         elif opt in ("-h", "--help"):
             display_help()
             sys.exit(0)
-        elif opt in ("-f", "--files="):
+        elif opt in ("-f", "--files"):
             print("Files: %s" % args)
             file_list = args.split(',')
-        elif opt in ("-l", "--mlfile="):
+        elif opt in ("-l", "--mlfile"):
             print("ML data: %s" % args)
             ml_data_file = args
-        elif opt in ("-o", "--output="):
+        elif opt in ("-o", "--output"):
             print("Output file: %s" % args)
             output_file = args
-        elif opt in ("-s", "--sklmethods="):
+        elif opt in ("-s", "--sklmethods"):
             print("Scikit-learn methods: %s" % args)
             use_sklearn = True
             for method in args.split(','):
                 sklmethods.append(method)
-        elif opt in ("-t", "--tfmethods="):
+        elif opt in ("-t", "--tfmethods"):
             print("Tensorflow methods: %s" % args)
             use_sklearn = True
             for method in args.split(','):
                 tfmethods.append(method)
         else:
+            print(opt, args)
             assert False, "unhandled option"
 
     # A mode must be selected:

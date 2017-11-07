@@ -32,7 +32,7 @@ num_input_lines = 5
 # The scaler to use for normalization.
 scaler = QuantileTransformer(output_distribution='normal')
 
-sgd_maxiter = 500
+sgd_maxiter = 20
 n_jobs = 2
 
 ###########################################################

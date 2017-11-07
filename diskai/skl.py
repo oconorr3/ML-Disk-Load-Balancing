@@ -8,11 +8,10 @@ import config
 from data import *
 
 size_classes = config.size_classes
-inputs = []
 outputs = []
 
-def skl_training(method, sklmethod):
-    sklmethod.fit(inputs, outputs)
+def skl_training(method, sklmethod, ins, outs):
+    sklmethod.fit(ins, outs)
     print("Accuracy score (on given inputs and outputs): %f" % sklmethod.score(inputs, outputs))
 
 
@@ -35,17 +34,18 @@ def initialize(mode, file_list, sklmethods):
     print("Total number of data points: %d" % data_size)
 
     # Normalize the inputs:
-    inputs_normalized = normalize_data(inputs)
+    normalized_inputs = normalize_data(inputs)
 
     if mode == 'train':
         print("Now training the neural network...")
         print(sklmethods)
         for method in sklmethods:
             training_network = config.sklmethods[method]
-
             print("Training using method \"%s\"..." % method)
-            skl_training(method, training_network)
+            skl_training(method, training_network, normalized_inputs, outputs)
             print("Training with method \"%s\" complete!" % method)
+            with open(method + '.output', 'w') as outfile:
+                outfile.write("Accuracy[%s]: %s", (method, sklmethod.score(inputs, outputs)))
     else:
         pass
 

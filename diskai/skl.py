@@ -3,7 +3,7 @@ Module to initialize the neural network.
 """
 # Global imports:
 import pickle
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 import config
 from data import *
@@ -102,12 +102,18 @@ def initialize(mode, file_list, sklmethods):
         for method in sklmethods:
             training_network = config.sklmethods[method]
             print("Training using method \"%s\"..." % method)
-            # skl_training(method, training_network, normalized_inputs, outputs)
-            plot_learning_curve(training_network, 'Learning curve for %s' % method,
-                normalized_inputs, outputs).show()
+            skl_training(method, training_network, normalized_inputs, outputs)
+            # plot_learning_curve(training_network, 'Learning curve for %s' % method,
+                # normalized_inputs, outputs).show()
             print("Training with method \"%s\" complete!" % method)
+
+            print("Writing to pickle file to represent the network...")
+            from sklearn.externals import joblib
+            joblib.dump(training_network, 'datadump.pkl')
+
+            print("Writing to output file...")
             with open(method + '.output', 'w') as outfile:
-                outfile.write("Accuracy[%s]: %s", (method, training_network.score(inputs, outputs)))
+                outfile.write("Accuracy[%s]: %s"% (method, training_network.score(inputs, outputs)))
     else:
         pass
 

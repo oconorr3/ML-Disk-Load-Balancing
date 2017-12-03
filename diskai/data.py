@@ -52,8 +52,7 @@ def normalize_data(inputs):
     np_inputs = np.asarray(inputs)
     #scaler.fit(np_inputs[:, [i * 4 - 1 for i in range(1, config.num_input_lines + 1)]])
     scaler.fit(np_inputs)
-    inputs_normalized = scaler.transform(
-        np_inputs)
+    inputs_normalized = scaler.transform(np_inputs)
     #    np_inputs[:, [i * 4 - 1 for i in range(1, config.num_input_lines + 1)]])
     #all_normed = np.concatenate((np_inputs[:, [0, 1, 2]], inputs_normalized[:, [0]]), axis=1)
     #all_normed = np.concatenate((all_normed, inputs_normalized[:, [0]]), axis=1)

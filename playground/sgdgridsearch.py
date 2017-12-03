@@ -91,13 +91,15 @@ inputs = np.concatenate((inputs, inputs_normalized[:, [4]]), axis=1)
 #        verbose=1, warm_start=False)
 
 parameters = {
+    'eta0': [0.01],
     'alpha': [0.00001, 0.001],
+    'learning_rate': ['optimal', 'invscaling'],
     'penalty': ['elasticnet', 'l1', 'l2'],
     'loss': ['hinge', 'log', 'huber', 'modified_huber'],
-    'max_iter': [150],
+    'max_iter': [500, 1000],
 }
 
-clf = GridSearchCV(SGDClassifier(), parameters, cv=5, verbose=True)
+clf = GridSearchCV(SGDClassifier(), parameters, cv=5, n_jobs=-1, verbose=10)
 
 clf.fit(inputs, outputs)
 
@@ -108,7 +110,7 @@ print(clf.best_params_)
 means = clf.cv_results_['mean_test_score']
 stds = clf.cv_results_['std_test_score']
 for mean, std, params in zip(means, stds, clf.cv_results_['params']):
-    print("%0.3f (+/-%0.03f) for %r"
+    print("%0.3f (+/-%0.03f) for %r" % (mean, std, params))
 
 from sklearn.externals import joblib
 joblib.dump(clf, 'datadump.pkl')

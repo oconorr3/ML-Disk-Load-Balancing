@@ -109,7 +109,7 @@ def initialize(mode, file_list, sklmethods):
 
             print("Writing to pickle file to represent the network...")
             from sklearn.externals import joblib
-            joblib.dump(training_network, 'datadump.pkl')
+            joblib.dump(training_network, "%s.sklnetwork.pkl" % (method))
 
             print("Writing to output file...")
             with open(method + '.output', 'w') as outfile:

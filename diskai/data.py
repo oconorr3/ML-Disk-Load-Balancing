@@ -28,9 +28,9 @@ def parse_input_row(row, previous_rows):
         previous_rows : the previous rows to parse data from
     RETURNS: list of information important to this particular row of input
     """
-    row_list = [row['size']]
+    row_list = [row['isWrite'], row['size']]
     for i in range(config.num_input_lines - 1):
-        row_list = row_list + [previous_rows[i]['size']]
+        row_list = row_list + [previous_rows[i]['isWrite'], previous_rows[i]['size']]
     return row_list
 
 def parse_output_row(row):

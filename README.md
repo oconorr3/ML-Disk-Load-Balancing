@@ -1,5 +1,5 @@
 # Machine Learning for Disk Allocation
-Project for CS 4284: Systems and Networking Capstone.
+Project for Capstone
 
 ## Installation Requirements
 Use virtualenv.
